@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi7mt7flbnhxk"]
+
+[ext_resource type="PackedScene" uid="uid://j471l8ieox7l" path="res://src/scenes/Player.tscn" id="1_mwe6a"]
+[ext_resource type="PackedScene" uid="uid://csnrroft3q18m" path="res://src/scenes/Door.tscn" id="2_4yial"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_duao8"]
+
+[node name="Level" type="Node3D"]
+
+[node name="Floor" type="CSGMesh3D" parent="."]
+transform = Transform3D(18.0632, 0, 0, 0, 1, 0, 0, 0, 31.8416, 0, 0, 0)
+use_collision = true
+collision_layer = 2
+mesh = SubResource("BoxMesh_duao8")
+
+[node name="Player" parent="." instance=ExtResource("1_mwe6a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53679, 0)
+
+[node name="Door" parent="." instance=ExtResource("2_4yial")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530138, 2.24839, -4.91447)

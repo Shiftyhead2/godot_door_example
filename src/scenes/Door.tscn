@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://csnrroft3q18m"]
+
+[ext_resource type="Script" path="res://src/scripts/Door.cs" id="1_gx8ua"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ltcq6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_teps1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmulg"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xuypi"]
+size = Vector3(1.54487, 3.46321, 0.95631)
+
+[node name="Door" type="Node3D" node_paths=PackedStringArray("frontFacingArea3D")]
+script = ExtResource("1_gx8ua")
+frontFacingArea3D = NodePath("FrontArea")
+
+[node name="HingePivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782459, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="HingePivot"]
+transform = Transform3D(1.55857, 0, 0, 0, 3.47081, 0, 0, 0, 0.223594, 0.782459, 0, 0)
+collision_layer = 6
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HingePivot/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 0, 0)
+shape = SubResource("BoxShape3D_ltcq6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HingePivot/StaticBody3D"]
+mesh = SubResource("BoxMesh_teps1")
+surface_material_override/0 = SubResource("StandardMaterial3D_vmulg")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="HingePivot/StaticBody3D"]
+transform = Transform3D(0.216835, 0, 0, 0, 0.047537, 0, 0, 0, 0.37724, 0.386727, 0.045279, 0.682768)
+mesh = SubResource("BoxMesh_teps1")
+
+[node name="FrontArea" type="Area3D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrontArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013237, -0.0011673, 0.575891)
+shape = SubResource("BoxShape3D_xuypi")

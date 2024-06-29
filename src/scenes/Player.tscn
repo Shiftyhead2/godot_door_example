@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://j471l8ieox7l"]
+
+[ext_resource type="Script" path="res://src/scripts/Player.cs" id="1_xfjak"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x0evi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hcd0l"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("cameraNode", "interactionRaycast")]
+collision_mask = 6
+script = ExtResource("1_xfjak")
+cameraNode = NodePath("CameraPivot")
+rotationSpeed = 0.3
+cameraActualRotationSpeed = 20.0
+interactionRaycast = NodePath("CameraPivot/InteractionRay")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_x0evi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_hcd0l")
+skeleton = NodePath("../..")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.699, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+
+[node name="InteractionRay" type="RayCast3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.047177, -0.430504)
+target_position = Vector3(0, 0, -1)
+collision_mask = 6
+debug_shape_custom_color = Color(0, 1, 0, 1)
