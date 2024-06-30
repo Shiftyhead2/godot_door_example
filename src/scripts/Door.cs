@@ -69,15 +69,15 @@ public partial class Door : Node3D, IInteractable
 				switch (objectInFront)
 				{
 					case true:
-						tween.TweenProperty(hingePivot, "rotation", new Vector3(0, Mathf.DegToRad(hingeRotationAngle), 0), 0.5f);
+						tween.TweenProperty(hingePivot, "rotation:y", Mathf.DegToRad(hingeRotationAngle), 0.5f);
 						break;
 					case false:
-						tween.TweenProperty(hingePivot, "rotation", new Vector3(0, Mathf.DegToRad(-hingeRotationAngle), 0), 0.5f);
+						tween.TweenProperty(hingePivot, "rotation:y", Mathf.DegToRad(-hingeRotationAngle), 0.5f);
 						break;
 				}
 				break;
 			case true:
-				tween.TweenProperty(hingePivot, "rotation", new Vector3(0, 0, 0), 0.5f);
+				tween.TweenProperty(hingePivot, "rotation:y", 0, 0.5f);
 				break;
 		}
 	}
