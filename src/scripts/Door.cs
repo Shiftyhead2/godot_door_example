@@ -52,6 +52,7 @@ public partial class Door : Node3D, IInteractable
 		}
 	}
 
+	//Open and closes the door
 	private void OpenOrCloseDoor()
 	{
 		if (tween != null)
