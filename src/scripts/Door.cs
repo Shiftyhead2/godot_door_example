@@ -5,6 +5,18 @@ public partial class Door : Node3D, IInteractable
 	[Export]
 	private Area3D frontFacingArea3D;
 
+	[Export]
+	private Node3D hingePivot;
+
+	private bool objectInFront = false;
+
+	[Export]
+	private float hingeRotationAngle = 90f;
+
+	private bool opened = false;
+
+	private Tween tween;
+
 
 	private CharacterBody3D player;
 	// Called when the node enters the scene tree for the first time.
@@ -17,27 +29,58 @@ public partial class Door : Node3D, IInteractable
 		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-
-	}
-
 	public void Interact()
 	{
-		GD.Print("Door Interacted");
+		opened = !opened;
+		OpenOrCloseDoor();
 	}
 
 
 	private void OnFrontArea3DBodyEntered(Node3D body)
 	{
-		GD.Print("Facing front");
-
+		if (body is CharacterBody3D)
+		{
+			objectInFront = true;
+		}
 	}
 
 	private void OnFrontArea3DBBodyExited(Node3D body)
 	{
-
+		if (body is CharacterBody3D)
+		{
+			objectInFront = false;
+		}
 	}
+
+	private void OpenOrCloseDoor()
+	{
+		if (tween != null)
+		{
+			tween.Kill();
+		}
+
+		tween = CreateTween();
+
+
+		switch (opened)
+		{
+			case false:
+				switch (objectInFront)
+				{
+					case true:
+						tween.TweenProperty(hingePivot, "rotation", new Vector3(0, Mathf.DegToRad(hingeRotationAngle), 0), 0.5f);
+						break;
+					case false:
+						tween.TweenProperty(hingePivot, "rotation", new Vector3(0, Mathf.DegToRad(-hingeRotationAngle), 0), 0.5f);
+						break;
+				}
+				break;
+			case true:
+				tween.TweenProperty(hingePivot, "rotation", new Vector3(0, 0, 0), 0.5f);
+				break;
+		}
+	}
+
+
 
 }

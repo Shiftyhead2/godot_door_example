@@ -48,6 +48,11 @@ public partial class Player : CharacterBody3D
 			{
 				Node3D collisionObject = interactionRaycast.GetCollider() as Node3D;
 
+				if (!collisionObject.IsInGroup("Interactable"))
+				{
+					return;
+				}
+
 				if (collisionObject.Owner is IInteractable)
 				{
 					IInteractable interactionObject = collisionObject.Owner as IInteractable;

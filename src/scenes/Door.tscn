@@ -12,17 +12,17 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xuypi"]
 size = Vector3(1.54487, 3.46321, 0.95631)
 
-[node name="Door" type="Node3D" node_paths=PackedStringArray("frontFacingArea3D")]
+[node name="Door" type="Node3D" node_paths=PackedStringArray("frontFacingArea3D", "hingePivot")]
 script = ExtResource("1_gx8ua")
 frontFacingArea3D = NodePath("FrontArea")
+hingePivot = NodePath("HingePivot")
 
 [node name="HingePivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782459, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="HingePivot"]
+[node name="StaticBody3D" type="StaticBody3D" parent="HingePivot" groups=["Interactable"]]
 transform = Transform3D(1.55857, 0, 0, 0, 3.47081, 0, 0, 0, 0.223594, 0.782459, 0, 0)
 collision_layer = 6
-collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HingePivot/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 0, 0)
