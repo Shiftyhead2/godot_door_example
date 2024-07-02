@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://csnrroft3q18m"]
+[gd_scene load_steps=5 format=3 uid="uid://csnrroft3q18m"]
 
 [ext_resource type="Script" path="res://src/scripts/Door.cs" id="1_gx8ua"]
 
@@ -9,12 +9,8 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmulg"]
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xuypi"]
-size = Vector3(1.54487, 3.46321, 0.95631)
-
-[node name="Door" type="Node3D" node_paths=PackedStringArray("frontFacingArea3D", "hingePivot")]
+[node name="Door" type="Node3D" node_paths=PackedStringArray("hingePivot")]
 script = ExtResource("1_gx8ua")
-frontFacingArea3D = NodePath("FrontArea")
 hingePivot = NodePath("HingePivot")
 
 [node name="HingePivot" type="Node3D" parent="."]
@@ -28,18 +24,13 @@ collision_layer = 6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 0, 0)
 shape = SubResource("BoxShape3D_ltcq6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="HingePivot/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HingePivot/StaticBody3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_teps1")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vmulg")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="HingePivot/StaticBody3D"]
-transform = Transform3D(0.216835, 0, 0, 0, 0.047537, 0, 0, 0, 0.37724, 0.386727, 0.045279, 0.682768)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="HingePivot/StaticBody3D/CollisionShape3D"]
+transform = Transform3D(0.216835, 0, 0, 0, 0.047537, 0, 0, 0, 0.377241, 0.386727, 0.045279, 0.682769)
 mesh = SubResource("BoxMesh_teps1")
-
-[node name="FrontArea" type="Area3D" parent="."]
-collision_layer = 0
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FrontArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013237, -0.0011673, 0.575891)
-shape = SubResource("BoxShape3D_xuypi")
+skeleton = NodePath("../..")

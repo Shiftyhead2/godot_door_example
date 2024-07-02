@@ -1,6 +1,8 @@
+using Godot;
+
 public interface IInteractable
 {
-  void Interact();
+  void Interact(Node3D obj = null);
 }
 
 

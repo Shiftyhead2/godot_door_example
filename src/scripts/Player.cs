@@ -56,7 +56,7 @@ public partial class Player : CharacterBody3D
 				if (collisionObject.Owner is IInteractable)
 				{
 					IInteractable interactionObject = collisionObject.Owner as IInteractable;
-					interactionObject.Interact();
+					interactionObject.Interact(this);
 				}
 			}
 		}

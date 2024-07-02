@@ -2,8 +2,6 @@ using Godot;
 
 public partial class Door : Node3D, IInteractable
 {
-	[Export]
-	private Area3D frontFacingArea3D;
 
 	[Export]
 	private Node3D hingePivot;
@@ -19,46 +17,30 @@ public partial class Door : Node3D, IInteractable
 
 
 	private CharacterBody3D player;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		if (frontFacingArea3D != null)
-		{
-			frontFacingArea3D.BodyEntered += OnFrontArea3DBodyEntered;
-			frontFacingArea3D.BodyExited += OnFrontArea3DBBodyExited;
-		}
-	}
 
-	public void Interact()
+	public void Interact(Node3D obj = null)
 	{
+		if (obj != null)
+		{
+			Vector3 dir = (Transform.Origin - obj.Transform.Origin).Normalized();
+			if (dir.Dot(-Transform.Basis.Z) > 0f)
+			{
+				objectInFront = true;
+			}
+			else if (dir.Dot(-Transform.Basis.Z) < 0f)
+			{
+				objectInFront = false;
+			}
+		}
+
 		opened = !opened;
 		OpenOrCloseDoor();
-	}
-
-
-	private void OnFrontArea3DBodyEntered(Node3D body)
-	{
-		if (body is CharacterBody3D)
-		{
-			objectInFront = true;
-		}
-	}
-
-	private void OnFrontArea3DBBodyExited(Node3D body)
-	{
-		if (body is CharacterBody3D)
-		{
-			objectInFront = false;
-		}
 	}
 
 	//Open and closes the door
 	private void OpenOrCloseDoor()
 	{
-		if (tween != null)
-		{
-			tween.Kill();
-		}
+		tween?.Kill();
 
 		tween = CreateTween();
 
