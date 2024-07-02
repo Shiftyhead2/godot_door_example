@@ -25,7 +25,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 0, 0)
 shape = SubResource("BoxShape3D_ltcq6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HingePivot/StaticBody3D/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_teps1")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vmulg")
