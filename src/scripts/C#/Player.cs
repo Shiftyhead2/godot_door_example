@@ -53,10 +53,18 @@ public partial class Player : CharacterBody3D
 					return;
 				}
 
+				//C# Interaction
 				if (collisionObject.Owner is IInteractable)
 				{
-					IInteractable interactionObject = collisionObject.Owner as IInteractable;
-					interactionObject.Interact(this);
+					IInteractable interactableObject = collisionObject.Owner as IInteractable;
+					interactableObject.Interact(this);
+				}
+
+				//GDScript interaction
+				if (collisionObject.Owner.HasMethod("interact"))
+				{
+					Node3D interactionObject = collisionObject.Owner as Node3D;
+					interactionObject.Call("interact", this);
 				}
 			}
 		}

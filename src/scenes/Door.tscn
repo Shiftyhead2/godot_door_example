@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://csnrroft3q18m"]
 
-[ext_resource type="Script" path="res://src/scripts/Door.cs" id="1_gx8ua"]
+[ext_resource type="Script" path="res://src/scripts/GDscript/Door.gd" id="1_qkc4h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ltcq6"]
 
@@ -9,11 +9,12 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmulg"]
 albedo_color = Color(1, 1, 0, 1)
 
-[node name="Door" type="Node3D" node_paths=PackedStringArray("hingePivot")]
-script = ExtResource("1_gx8ua")
-hingePivot = NodePath("HingePivot")
+[node name="Door" type="Node3D"]
+script = ExtResource("1_qkc4h")
+hingeRotationLimit = 90.0
 
 [node name="HingePivot" type="Node3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782459, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="HingePivot" groups=["Interactable"]]

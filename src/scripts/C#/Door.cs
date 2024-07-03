@@ -16,8 +16,6 @@ public partial class Door : Node3D, IInteractable
 	private Tween tween;
 
 
-	private CharacterBody3D player;
-
 	public void Interact(Node3D obj = null)
 	{
 		if (obj != null)
